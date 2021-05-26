@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Dog(models.Model):
-    first_name = models.CharField(max_length=255, null=False, blank=False)
+    first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
@@ -25,5 +25,3 @@ class BoardingVisit(models.Model):
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
-
-    
