@@ -10,7 +10,6 @@ django-bootstrap4 = "*"
 python-decouple = "*"
 gunicorn = "*"
 django-cors-headers = "*"
-importlib-metadata = "*"
 django-crispy-forms = "*"
 holidays = "*"
 
