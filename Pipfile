@@ -7,10 +7,11 @@ name = "pypi"
 django = "*"
 psycopg2-binary = "*"
 django-bootstrap4 = "*"
-django-cors = "*"
 python-decouple = "*"
 gunicorn = "*"
 django-cors-headers = "*"
+importlib-metadata = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 

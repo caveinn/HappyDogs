@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d0da6c22c34145779533ce4a3546ba1a9dc72a2565d948cc8cb1c4b127afb9e0"
+            "sha256": "299766bba51ce0331ae920c8eae96c69788be55db8438a9db69df60f2f61f2e1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -48,14 +48,6 @@
             "index": "pypi",
             "version": "==3.0.1"
         },
-        "django-cors": {
-            "hashes": [
-                "sha256:ba31c9455ddb848e578b26bac3634049951149775b818a35476d2b50350640c3",
-                "sha256:c0e343a28130207c5c52de24ddefdf53e0dd1c6a3aba6771b665f3b7ca71d849"
-            ],
-            "index": "pypi",
-            "version": "==0.1"
-        },
         "django-cors-headers": {
             "hashes": [
                 "sha256:1ac2b1213de75a251e2ba04448da15f99bcfcbe164288ae6b5ff929dc49b372f",
@@ -64,6 +56,14 @@
             "index": "pypi",
             "version": "==3.7.0"
         },
+        "django-crispy-forms": {
+            "hashes": [
+                "sha256:3db71ab06d17ec9d0195c086d3ad454da300ac268752ac3a4f63d72f7a490254",
+                "sha256:88efa857ce6111bd696cc4f74057539a3456102fe9c3a3ece8868e1e4579e70a"
+            ],
+            "index": "pypi",
+            "version": "==1.11.2"
+        },
         "gunicorn": {
             "hashes": [
                 "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e",
@@ -71,6 +71,14 @@
             ],
             "index": "pypi",
             "version": "==20.1.0"
+        },
+        "importlib-metadata": {
+            "hashes": [
+                "sha256:b8de9eff2b35fb037368f28a7df1df4e6436f578fa74423505b6c6a778d5b5dd",
+                "sha256:c2d6341ff566f609e89a2acb2db190e5e1d23d5409d6cc8d2fe34d72443876d4"
+            ],
+            "index": "pypi",
+            "version": "==2.1.1"
         },
         "psycopg2-binary": {
             "hashes": [
@@ -143,6 +151,23 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.1"
+        },
+        "typing-extensions": {
+            "hashes": [
+                "sha256:0ac0f89795dd19de6b97debb0c6af1c70987fd80a2d62d1958f7e56fcc31b497",
+                "sha256:50b6f157849174217d0656f99dc82fe932884fb250826c18350e159ec6cdf342",
+                "sha256:779383f6086d90c99ae41cf0ff39aac8a7937a9283ce0a414e5dd782f4c94a84"
+            ],
+            "markers": "python_version < '3.8'",
+            "version": "==3.10.0.0"
+        },
+        "zipp": {
+            "hashes": [
+                "sha256:3607921face881ba3e026887d8150cca609d517579abe052ac81fc5aeffdbd76",
+                "sha256:51cb66cc54621609dd593d1787f286ee42a5c0adbb4b29abea5a63edc3e03098"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==3.4.1"
         }
     },
     "develop": {}

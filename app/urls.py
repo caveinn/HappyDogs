@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from .happy_dogs.views import CreateDogView
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('add_dog',CreateDogView.as_view(), name='add_dog' )
+
 ]

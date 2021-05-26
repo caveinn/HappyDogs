@@ -1,0 +1,31 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Happy Dogs</title>
+    <!-- Favicon icon -->
+
+
+</head>
+
+<body class="h-100">
+    <form class="mt-5 mb-5 login-input" method="POST">
+        {% csrf_token %}
+        {{message}}
+        {{form|crispy}}
+        <button class="btn login-form__btn submit w-100">Add</button>
+    </form>
+</body>
+</html>
+
+
+
+
+
+{% endblock %}
