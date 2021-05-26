@@ -53,12 +53,14 @@ class QueryDatesView(FormView):
         delta = end_date - start_date
         visits_data = [[]]
         start_day =  start_date.weekday()
+        end_day =end_date.weekday()
+        days_to_weekend = 6-end_day
         number_of_weeks = math.ceil((delta.days+start_day)/7)
         days_added = 0
         weeks_added= 0
 
         #padding date:
-        for i in range(start_day+1):
+        for i in range(start_day):
             visits_data[weeks_added].append({"count": None,  "visits":None, "day_of_week": None, "date" : None})
             days_added += 1
             if days_added % 7 == 0:
@@ -74,5 +76,13 @@ class QueryDatesView(FormView):
                 days_added =0
                 weeks_added +=1
                 visits_data.append([])
+        for i in range(days_to_weekend):
+            visits_data[weeks_added].append({"count": None,  "visits":None, "day_of_week": None, "date" : None})
+            days_added += 1
+            if days_added % 7 == 0:
+                days_added =0
+                weeks_added +=1
+                visits_data.append([])
+
         print(weeks_added)
         return render(request, self.template_name, {"form": form, "visits_data": visits_data, })
