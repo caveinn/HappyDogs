@@ -9,6 +9,12 @@ class Dog(models.Model):
     class Meta:
         unique_together = ['first_name', 'last_name']
 
+    def __repr__(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 class BoardingVisit(models.Model):
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
     start_date = models.DateField()
