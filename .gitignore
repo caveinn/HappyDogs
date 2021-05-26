@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+#vscod settings
+.vscode/
+
+
+#django static files
+staticfiles/
