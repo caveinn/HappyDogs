@@ -25,3 +25,9 @@ class BoardingVisit(models.Model):
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
+
+    def save(self, *args, **kwargs):
+        start_date_overlaps = self.dog.boardingvisit_set.filter(start_date__range=[self.start_date, self.end_date] ).exists()
+        end_date_overlaps = self.dog.boardingvisit_set.filter(end_date__range=[self.start_date, self.end_date] ).exists()
+        if not start_date_overlaps and not end_date_overlaps:
+            return super().save(*args, **kwargs)

@@ -13,160 +13,41 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <title>Happy Dogs</title>
     <!-- Favicon icon -->
-    <style>
-        body {
-            font-family: Tahoma;
-        }
-
-
-
-        /* declare a 7 column grid on the table */
-        #calendar {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-        }
-
-        #calendar tr,
-        #calendar tbody {
-            grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            width: 100%;
-        }
-
-        caption {
-            text-align: center;
-            grid-column: 1 / -1;
-            font-size: 130%;
-            font-weight: bold;
-            padding: 10px 0;
-        }
-
-        #calendar a {
-            color: #8e352e;
-            text-decoration: none;
-        }
-
-        #calendar td,
-        #calendar th {
-            padding: 5px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-        }
-
-        #calendar .weekdays {
-            background: #8e352e;
-        }
-
-
-        #calendar .weekdays th {
-            text-align: center;
-            text-transform: uppercase;
-            line-height: 20px;
-            border: none !important;
-            padding: 10px 6px;
-            color: #fff;
-            font-size: 13px;
-        }
-
-        #calendar td {
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #calendar .days li:hover {
-            background: #d3d3d3;
-        }
-
-        #calendar .date {
-            margin-bottom: 5px;
-            padding: 4px;
-            color: #333;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            text-align: center;
-            align-self: flex-end;
-        }
-
-        #calendar .date p {
-            margin: auto;
-        }
-
-        #calendar .event {
-            flex: 0 0 auto;
-            font-size: 13px;
-            border-radius: 4px;
-            padding: 5px;
-            margin-bottom: 5px;
-            line-height: 14px;
-            background: #e4f2f2;
-            border: 1px solid #b5dbdc;
-            color: #009aaf;
-            text-decoration: none;
-        }
-
-        #calendar .event-desc {
-            color: #666;
-            margin: 3px 0 7px 0;
-            text-decoration: none;
-        }
-
-        #calendar .other-month {
-            background: #f5f5f5;
-            color: #666;
-        }
-
-        /* ============================
-                        Mobile Responsiveness
-           ============================*/
-
-
-        @media(max-width: 768px) {
-
-            #calendar .weekdays,
-            #calendar .other-month {
-                display: none;
-            }
-
-            #calendar li {
-                height: auto !important;
-                border: 1px solid #ededed;
-                width: 100%;
-                padding: 10px;
-                margin-bottom: -1px;
-            }
-
-            #calendar,
-            #calendar tr,
-            #calendar tbody {
-                grid-template-columns: 1fr;
-            }
-
-            #calendar tr {
-                grid-column: 1 / 2;
-            }
-
-            #calendar .date {
-                align-self: flex-start;
-            }
-        }
-    </style>
+    <link href="{% static 'style.css' %}" rel="stylesheet" />
 
 </head>
 
 <body class="h-100">
-    <form class="mt-5 mb-5 login-input" method="POST">
-        {% csrf_token %}
-        {{message}}
-        <!-- {%for erorr in form.errors%} -->
-        <!-- {%endfor%} -->
-        {{form|crispy}}
-        <button class="btn login-form__btn submit w-100">Add</button>
-    </form>
-    <a href=""></a>
+    <div class="columns" id="main_form">
+        <div class="column is-half">
+        <form class="column " method="POST" >
+            {% csrf_token %}
+            {{message}}
+            <!-- {%for erorr in form.errors%} -->
+            <!-- {%endfor%} -->
+            {{form|crispy}}
+            <br/>
+            <button class="button is-warning">Submit</button>
+        </form>
+    </div>
+        <div class="column">
+            <a href="{%url 'load_seed_data'%}">
+                <button class="button is-primary">
+                    Generate Data
+                </button>
+            </a>
+        </div>
+
+        <div class="column">
+            <a href="{%url 'admin:index'%}" target="_blank">
+                <button class="button is-link">
+                   Go to admin
+                </button>
+            </a>
+        </div>
+
+    </div>
+
     {{weeks}}
     <table id="calendar">
         <tr class="weekdays">
@@ -208,11 +89,20 @@
             </td>
             <div class="modal" id="{{day.date.day}}{{day.date.month}}{{day.date.year}}">
                 <div class="modal-background"></div>
-                <div class="modal-content">
                     <!-- Any other Bulma elements you want -->
-                {%for visit in day.visits%}
-                    <div>Dog {{forloop.counter}}: {{visit.dog.full_name}}</div>
-                {%endfor%}
+
+                <div class="modal-content">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Dogs In board</p>
+                        <button class="delete" aria-label="close" onclick="closed('{{day.date.day}}{{day.date.month}}{{day.date.year}}')"></button>
+                      </header>
+                      {%for visit in day.visits%}
+                      <section class="modal-card-body">
+                        <div>Dog {{forloop.counter}}: {{visit.dog.full_name}}</div>
+                      </section>
+                      {%endfor%}
+                    </div>
+
                 </div>
                 <button class="modal-close is-large" aria-label="close" onclick="closed('{{day.date.day}}{{day.date.month}}{{day.date.year}}')"></button>
             </div>

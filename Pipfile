@@ -12,6 +12,7 @@ gunicorn = "*"
 django-cors-headers = "*"
 importlib-metadata = "*"
 django-crispy-forms = "*"
+holidays = "*"
 
 [dev-packages]
 

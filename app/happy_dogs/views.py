@@ -1,10 +1,14 @@
 import math
+import holidays
 
+from random import randint, choice, uniform
 from datetime import datetime, timedelta
-from django.shortcuts import render
-from django.views.generic import FormView
+from django.shortcuts import redirect, render
+from django.views.generic import FormView, TemplateView
 from .models import Dog, BoardingVisit
 from .forms import DogCreateForm, BoardingVisitForm, QueryDatesForm
+from django.urls import reverse
+
 
 # Create your views here.
 
@@ -84,5 +88,42 @@ class QueryDatesView(FormView):
                 weeks_added +=1
                 visits_data.append([])
 
-        print(weeks_added)
         return render(request, self.template_name, {"form": form, "visits_data": visits_data, })
+
+class LoadSeedData(TemplateView):
+    template_name = 'happy_dogs/home.html'
+
+    def get(self, request):
+        BoardingVisit.objects.all().delete()
+        us_hoilidays  = holidays.US(years=2021)
+        date = datetime(2021, 1,1)
+        likely = uniform(0,10)
+        holiday_neighbours = []
+        dogs = Dog.objects.all()
+
+        for k in us_hoilidays.keys():
+           holiday_neighbours +=  [
+            k-timedelta(days=2),
+            k-timedelta(days=1),
+            k+timedelta(days=1),
+            k+timedelta(days=2),
+            ]
+
+
+        while date.year == 2021:
+            likely = randint(0,10)
+            if date.weekday() >= 5 and likely%2 == 0:
+                dog = choice(dogs)
+                visit =BoardingVisit(start_date =date , end_date = date + timedelta(days=randint(0,10)), dog=dog)
+                visit.save()
+            elif date in holiday_neighbours and likely %3 == 0:
+                dog = choice(dogs)
+                visit =BoardingVisit(start_date =date , end_date = date + timedelta(days=randint(0,10)), dog=dog)
+                visit.save()
+            elif likely  % 9  == 0:
+                dog = choice(dogs)
+                visit =BoardingVisit(start_date =date , end_date = date + timedelta(days=randint(0,10)), dog=dog)
+                visit.save()
+            date = date+ timedelta(days=1)
+
+        return redirect(reverse('home'))

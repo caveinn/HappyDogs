@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .happy_dogs.views import CreateDogView, BoardingVisitView, QueryDatesView
+from .happy_dogs.views import CreateDogView, BoardingVisitView, QueryDatesView, LoadSeedData
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('add_dog',CreateDogView.as_view(), name='add_dog' ),
     path('add_visit',BoardingVisitView.as_view(), name='add_visit'),
-    path('',QueryDatesView.as_view(), name='home' )
+    path('',QueryDatesView.as_view(), name='home' ),
+    path('load_seed_data',LoadSeedData.as_view(), name='load_seed_data')
 
 ]
